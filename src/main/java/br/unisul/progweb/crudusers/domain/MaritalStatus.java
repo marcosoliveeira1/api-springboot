@@ -1,10 +1,18 @@
 package br.unisul.progweb.crudusers.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
+
 public class MaritalStatus implements Serializable {
 
+
+    @Id
+    @GeneratedValue
     private Integer id;
     private String name;
     private boolean isActive;
