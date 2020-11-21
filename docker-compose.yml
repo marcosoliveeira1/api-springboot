@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  mysql-crud-users:
+    container_name: crud_users
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "crud_users"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./Docker/Mysql:/var/lib/mysql
+    networks:
+      - mysql-crud-usuarios-network
+networks:
+  mysql-crud-usuarios-network:
+    driver: bridge
+
