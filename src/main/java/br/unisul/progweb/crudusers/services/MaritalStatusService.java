@@ -17,4 +17,10 @@ public class MaritalStatusService {
         Optional<MaritalStatus> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! ID: "+id+", Tipo: Estado Civil"));
     }
+
+    public MaritalStatus insert(MaritalStatus obj){
+        obj.setId(null);
+
+        return repo.save(obj);
+    }
 }
