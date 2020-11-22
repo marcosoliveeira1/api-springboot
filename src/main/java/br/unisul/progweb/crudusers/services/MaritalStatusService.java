@@ -23,4 +23,9 @@ public class MaritalStatusService {
 
         return repo.save(obj);
     }
+
+    public MaritalStatus update(MaritalStatus obj) {
+        findById(obj.getId());
+        return repo.save(obj);
+    }
 }

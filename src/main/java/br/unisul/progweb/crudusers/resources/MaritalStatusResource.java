@@ -18,6 +18,7 @@ public class MaritalStatusResource {
     @Autowired
     private MaritalStatusService service;
 
+
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id){
         MaritalStatus obj = service.findById(id);
@@ -30,5 +31,13 @@ public class MaritalStatusResource {
         URI uri = new UriBuilder(obj.getId()).getUri();
 
         return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> update(@RequestBody MaritalStatus obj, @PathVariable Integer id){
+        obj.setId(id);
+        obj = service.update(obj);
+
+        return ResponseEntity.noContent().build();
     }
 }
