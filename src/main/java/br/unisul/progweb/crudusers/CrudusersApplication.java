@@ -34,7 +34,10 @@ public class CrudusersApplication implements CommandLineRunner {
 //        MaritalStatus single = new MaritalStatus(null, "Solteiro(a)", true);
 //        MaritalStatus married = new MaritalStatus(null, "Casado(a)", true);
 //        MaritalStatus divorcied = new MaritalStatus(null, "Viúvo(a)", true);
+//        MaritalStatus ms1 = new MaritalStatus(null, "Separado(a) judicialmente", true);
+//        MaritalStatus ms2 = new MaritalStatus(null, "Em união estável", true);
 //        maritalStatusRepository.saveAll(Arrays.asList(single, married, divorcied));
+//        maritalStatusRepository.saveAll(Arrays.asList(ms1, ms2));
 //
 //
 //        Gender male = new Gender(null, "Masculino", true);

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 
 @RestController
@@ -17,6 +18,12 @@ public class MaritalStatusResource {
 
     @Autowired
     private MaritalStatusService service;
+
+    @GetMapping("/")
+    public ResponseEntity<List<MaritalStatus>> findAll() {
+        List<MaritalStatus> list = service.findAllActive();
+        return ResponseEntity.ok().body(list);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
