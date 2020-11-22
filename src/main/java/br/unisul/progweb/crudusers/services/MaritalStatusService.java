@@ -13,12 +13,12 @@ public class MaritalStatusService {
     @Autowired
     private MaritalStatusRepository repo;
 
-    public MaritalStatus findById(Integer id){
+    public MaritalStatus findById(Integer id) {
         Optional<MaritalStatus> obj = repo.findById(id);
-        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! ID: "+id+", Tipo: Estado Civil"));
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! ID: " + id + ", Tipo: Estado Civil"));
     }
 
-    public MaritalStatus insert(MaritalStatus obj){
+    public MaritalStatus insert(MaritalStatus obj) {
         obj.setId(null);
 
         return repo.save(obj);
@@ -27,5 +27,11 @@ public class MaritalStatusService {
     public MaritalStatus update(MaritalStatus obj) {
         findById(obj.getId());
         return repo.save(obj);
+    }
+
+    public void delete(Integer id) {
+        MaritalStatus obj = findById(id);
+        obj.setActive(false);
+        repo.save(obj);
     }
 }

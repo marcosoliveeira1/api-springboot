@@ -12,21 +12,20 @@ import java.net.URI;
 
 
 @RestController
-@RequestMapping(value="/api/v1/maritalstatus")
+@RequestMapping(value = "/api/v1/maritalstatus")
 public class MaritalStatusResource {
 
     @Autowired
     private MaritalStatusService service;
 
-
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable Integer id){
+    public ResponseEntity<?> findById(@PathVariable Integer id) {
         MaritalStatus obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
 
     @PostMapping("/")
-    public ResponseEntity<Void> insert(@RequestBody MaritalStatus obj){
+    public ResponseEntity<Void> insert(@RequestBody MaritalStatus obj) {
         obj = service.insert(obj);
         URI uri = new UriBuilder(obj.getId()).getUri();
 
@@ -34,10 +33,16 @@ public class MaritalStatusResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@RequestBody MaritalStatus obj, @PathVariable Integer id){
+    public ResponseEntity<Void> update(@RequestBody MaritalStatus obj, @PathVariable Integer id) {
         obj.setId(id);
         obj = service.update(obj);
 
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Integer id) {
+        service.delete(id);
         return ResponseEntity.noContent().build();
     }
 }
