@@ -18,7 +18,9 @@ public class User implements Serializable {
     @Id
     @GeneratedValue
     private Integer id;
-    private String name, login, cpf;
+    private String name;
+    private String login;
+    private String cpf;
     private LocalDate birthday;
 
     @ManyToOne()
