@@ -1,37 +1,62 @@
 package br.unisul.progweb.crudusers.dto;
 
 import br.unisul.progweb.crudusers.domain.User;
+import br.unisul.progweb.crudusers.domain.enums.Gender;
+import br.unisul.progweb.crudusers.domain.enums.MaritalStatus;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.sun.xml.internal.ws.developer.Serialization;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
-public class UserDTO {
+@Serialization
+public class UserDTO implements Serializable {
     private Integer id;
 
-    @NotEmpty(message = "Prenchimento obrigatório")
+    @Length(message = "Nome precisa ter no minimo 5 digitos", min=5)
     private String name;
 
-    @NotEmpty(message = "Prenchimento obrigatório")
+    @Length(message = "Login precisa ter no minimo 5 digitos", min=5)
     private String login;
 
-    @NotEmpty(message = "Prenchimento obrigatório")
-    @Size(min = 11, max = 11, message = "CPF inválido")
+    @Length(message = "CPF precisa ter 11 números", min=11, max=11)
     private String cpf;
 
-    @NotEmpty(message = "Prenchimento obrigatório")
-    private LocalDate birthday;
+    @NotNull(message = "Data de nascimento é um campo obrigatório")
+    private String birthday;
+
+    private Gender gender;
+
+    private MaritalStatus maritalStatus;
+
+    @JsonFormat(shape = JsonFormat.Shape.OBJECT)
+    public Gender getGender() {
+        return gender;
+    }
+
+    @JsonFormat(shape = JsonFormat.Shape.OBJECT)
+    public MaritalStatus getMaritalStatus() {
+        return maritalStatus;
+    }
+
+//    public void setBirthday(String birthday) {
+//        this.birthday = DateFormat.convertStringToLocalDate(birthday);
+//    }
 
     public UserDTO(User obj) {
         this.id = obj.getId();
         this.name = obj.getName();
         this.login = obj.getLogin();
         this.cpf = obj.getCpf();
-        this.birthday = obj.getBirthday();
+        this.birthday = obj.getBirthday().toString();
+        this.gender = obj.getGender();
+        this.maritalStatus = obj.getMaritalStatus();
     }
 
 

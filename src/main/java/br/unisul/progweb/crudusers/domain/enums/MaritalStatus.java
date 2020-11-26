@@ -1,6 +1,7 @@
 package br.unisul.progweb.crudusers.domain.enums;
 
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,8 +12,8 @@ public enum MaritalStatus {
     SINGLE(0, "Solteiro(a)"),
     MARRIED(1, "Casado(a)"),
     WIDOWED(2, "Viúvo(a)"),
-    DIVORCED(2, "Divorciado(a)"),
-    ANOTHER(2, "Outro");
+    DIVORCED(3, "Divorciado(a)"),
+    ANOTHER(4, "Outro");
 
     private Integer id;
     private String name;
@@ -30,6 +31,11 @@ public enum MaritalStatus {
         }
 
         throw new IllegalArgumentException("Id inválido: " + id);
+    }
+
+    @JsonValue
+    public String getName() {
+        return name;
     }
 
 }

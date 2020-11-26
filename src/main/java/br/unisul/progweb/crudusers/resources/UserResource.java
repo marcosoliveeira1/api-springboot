@@ -1,8 +1,8 @@
 package br.unisul.progweb.crudusers.resources;
 
 import br.unisul.progweb.crudusers.domain.User;
-import br.unisul.progweb.crudusers.domain.User;
 import br.unisul.progweb.crudusers.dto.UserDTO;
+import br.unisul.progweb.crudusers.dto.UserManagementDTO;
 import br.unisul.progweb.crudusers.resources.exceptions.helper.UriBuilder;
 import br.unisul.progweb.crudusers.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value="/api/v1/user")
+@CrossOrigin(origins = "*")
 public class UserResource {
 
     @Autowired
@@ -38,7 +39,7 @@ public class UserResource {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Void> insert(@Valid @RequestBody UserDTO objDto) {
+    public ResponseEntity<Void> insert(@Valid @RequestBody UserManagementDTO objDto) {
         User obj = service.fromDTO(objDto);
         obj = service.insert(obj);
         URI uri = new UriBuilder(obj.getId()).getUri();
@@ -47,7 +48,7 @@ public class UserResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@Valid @RequestBody UserDTO objDto, @PathVariable Integer id) {
+    public ResponseEntity<Void> update(@Valid @RequestBody UserManagementDTO objDto, @PathVariable Integer id) {
         User obj = service.fromDTO(objDto);
         obj.setId(id);
         obj = service.update(obj);

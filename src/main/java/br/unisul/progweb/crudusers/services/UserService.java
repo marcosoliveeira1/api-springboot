@@ -1,8 +1,12 @@
 package br.unisul.progweb.crudusers.services;
 
 import br.unisul.progweb.crudusers.domain.User;
+import br.unisul.progweb.crudusers.domain.enums.Gender;
+import br.unisul.progweb.crudusers.domain.enums.MaritalStatus;
 import br.unisul.progweb.crudusers.dto.UserDTO;
+import br.unisul.progweb.crudusers.dto.UserManagementDTO;
 import br.unisul.progweb.crudusers.repository.UserRepository;
+import br.unisul.progweb.crudusers.services.utils.DateFormat;
 import br.unisul.progweb.crudusers.services.exceptions.ObjectNotFoundException;
 import br.unisul.progweb.crudusers.services.exceptions.DataIntegrityException;
 
@@ -13,7 +17,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,7 +61,11 @@ public class UserService {
     }
 
     public User fromDTO(UserDTO objDto) {
-        return new User(objDto.getId(), objDto.getName(), objDto.getLogin(), objDto.getCpf(), objDto.getBirthday(), null, null);
+        return new User(objDto.getId(), objDto.getName(), objDto.getLogin(), objDto.getCpf(), DateFormat.convertStringToLocalDate(objDto.getBirthday()), Gender.toEnum(objDto.getGender().getId()), MaritalStatus.toEnum(objDto.getMaritalStatus().getId()), null);
+    }
+
+    public User fromDTO(UserManagementDTO objDto) {
+        return new User(null, objDto.getName(), objDto.getLogin(), objDto.getCpf(), DateFormat.convertStringToLocalDate(objDto.getBirthday()), Gender.toEnum(objDto.getGender().getId()), MaritalStatus.toEnum(objDto.getMaritalStatus().getId()), objDto.getPassword());
     }
 
     private void updateData(User newObj, User obj){
@@ -66,7 +73,12 @@ public class UserService {
         newObj.setLogin(obj.getLogin());
         newObj.setCpf(obj.getCpf());
         newObj.setBirthday(obj.getBirthday());
+        newObj.setPassword(obj.getPassword());
+        newObj.setGender(Gender.toEnum(obj.getGender().getId()));
+        newObj.setMaritalStatus(MaritalStatus.toEnum(obj.getMaritalStatus().getId()));
     }
+
+
 
 
 }

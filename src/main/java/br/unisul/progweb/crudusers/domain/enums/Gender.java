@@ -1,6 +1,7 @@
 package br.unisul.progweb.crudusers.domain.enums;
 
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -30,5 +31,10 @@ public enum Gender {
 
         throw new IllegalArgumentException("Id inválido: " + id);
     }
-    
+
+    @JsonValue
+    public String getName() {
+        return name;
+    }
+
 }
