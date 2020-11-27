@@ -10,7 +10,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./Docker/Mysql/data:/var/lib/mysql
+      - ./Docker/Mysql/transfer:/transfer
     networks:
       - mysql-crud-usuarios-network
 networks:
