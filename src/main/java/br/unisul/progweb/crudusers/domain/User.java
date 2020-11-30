@@ -2,7 +2,6 @@ package br.unisul.progweb.crudusers.domain;
 
 import br.unisul.progweb.crudusers.domain.enums.Gender;
 import br.unisul.progweb.crudusers.domain.enums.MaritalStatus;
-import com.sun.xml.internal.ws.developer.Serialization;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,7 +12,6 @@ import java.time.LocalDate;
 @Data
 @Entity
 @NoArgsConstructor
-@Serialization
 public class User implements Serializable {
     @Id
     @GeneratedValue

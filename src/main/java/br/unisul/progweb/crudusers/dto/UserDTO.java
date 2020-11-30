@@ -4,18 +4,15 @@ import br.unisul.progweb.crudusers.domain.User;
 import br.unisul.progweb.crudusers.domain.enums.Gender;
 import br.unisul.progweb.crudusers.domain.enums.MaritalStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.sun.xml.internal.ws.developer.Serialization;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
-@Serialization
 public class UserDTO implements Serializable {
     private Integer id;
 
