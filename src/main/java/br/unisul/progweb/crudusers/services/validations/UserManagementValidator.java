@@ -30,9 +30,13 @@ public class UserManagementValidator implements ConstraintValidator<UserManageme
     public boolean isValid(UserManagementDTO objDto, ConstraintValidatorContext context) {
 
         List<FieldMessage> list = new ArrayList<>();
+        Integer uriId = null;
+        if(request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE) instanceof Map) {
+            Map<String, String> map = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
+            uriId = map.get("id") == null ? 0 : Integer.parseInt(map.get("id"));
+        }
 
-        Map<String, String> map = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
-        Integer uriId = map.get("id") == null ? 0 : Integer.parseInt(map.get("id"));
+
         User aux = repo.findByLogin(objDto.getLogin());
         if (aux != null && !aux.getId().equals(uriId)) {
             list.add(new FieldMessage("login", "Login já existente"));
